@@ -1,0 +1,214 @@
+//
+//  PrefixHeader.pch
+//  rehab
+//
+//  Created by Matech on 3/2/16.
+//  Copyright © 2016 Matech. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#define new_version 1
+#define IPHONE_X \
+({BOOL isPhoneX = NO;\
+if (@available(iOS 11.0, *)) {\
+isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bottom > 0.0;\
+}\
+(isPhoneX);})
+#define DEFAULTS  [NSUserDefaults standardUserDefaults]
+#define ScreenW ([UIScreen mainScreen].bounds.size.width)
+#define IPONE5  [UIScreen mainScreen].bounds.size.width < 375
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#ifdef __OBJC__
+
+#ifdef DEBUG
+
+#define NSSLog(FORMAT, ...) fprintf(stderr,"%s:%d\t%s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+
+#else
+
+#define NSSLog(...)
+
+#endif
+#import "AppDelegate.h"
+#import "Utility.h"
+#import "RCAppUtils.h"
+#import "UINavigationBar+Awesome.h"
+#import "ReactiveCocoa.h"
+#import "WELLKit.h"
+#import <YYKit/YYKit.h>
+#import "AppDelegate+WR.h"
+#import "UIView+Layout.h"
+#import "MBProgressHUD.h"
+#import <BlocksKit/BlocksKit.h>
+#import <BlocksKit/BlocksKit+UIKit.h>
+#import "UIKit+WR.h"
+#import "WRDateformatter.h"
+#import "FMDB.h"
+#import "UMengUtils.h"
+#import <UMMobClick/MobClick.h>
+#import <UMSocialCore/UMSocialCore.h>
+#import "UIImageView+WebCache.h"
+
+
+//元素间隙
+#define kGap0 0
+#define kGap5 5
+#define kGap10 10
+#define kGap15 15
+#define kGap20 20
+#define kGap25 25
+#define kGap30 30
+#define kGap35 35
+#define kGap40 40
+#define kGap45 45
+#define kGap50 50
+#define kGap60 60
+#define kGap100 100
+//行高
+#define kLineHeight25 25
+#define kLineHeight20 20
+//字体大小
+#define kFontSize15 15
+#define kFontSize13 13
+
+//常用颜色
+#define kGray [UIColor colorWithRed:224/255.0 green:224/255.0 blue:224/255.0 alpha:1]
+#define kBlue [UIColor colorWithRed:112/255.0 green:198/255.0 blue:250/255.0 alpha:1]
+
+#define kCyan [UIColor colorWithRed:92/255.0 green:157/255.0 blue:255/255.0 alpha:1]
+//宏定义图片
+#define IMAGE(imageName) [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageName]]
+//cell内icon大小
+#define kImgWidth 0
+#define kImgWidthR 50
+#define kLabelWidth (kScreenWidth - kImgWidth - kGap30)
+//宏定义RGB颜色
+#define COLOR(R,G,B,A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
+//IOS7自动在ScollView添加64px空白
+#define kBlankHeight 64
+//公司logo高度
+#define kLogoHeight 72
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+//浅灰颜色
+#define COLOR_grayColor [UIColor colorWithRed:171.0/255.0 green:171.0/255.0 blue:171.0/255.0 alpha:1]
+//搜索选项按钮宽度
+#define kSearchSelectBtnWidth 90
+//搜索下拉框背景宽度
+#define kSearchSelectBgWidth 150
+//搜索框高度
+#define kSearchTextboxHeight 44
+//搜索框左右间距
+#define kSearchLR 3
+
+//系统版本号
+#define kIOSVersion [UIDevice currentDevice].systemVersion.doubleValue
+
+//用户基本信息
+#define kUserDefault [NSUserDefaults standardUserDefaults]
+#define kUserDefaultName [kUserDefault objectForKey:@"name"]
+#define kUserDefaultPassword [kUserDefault objectForKey:@"password"]
+#define kUserDefaultPToken [kUserDefault objectForKey:@"pToken"]
+#define kUserDefaultVToken [kUserDefault objectForKey:@"vToken"]
+#define kUserDefaultsCookie @"userDefaultsCookie"
+
+#define kUserDefaultNameFund [kUserDefault objectForKey:@"nameFund"]
+#define kUserDefaultPasswordFund [kUserDefault objectForKey:@"passwordFund"]
+#define kUserDefaultsCookieFund @"userDefaultsCookieFund"
+
+//APP背景图片
+//#define kAppBg @"appBg"
+#define kAppBg @"loginBg.jpg"
+#define MinX(v)            CGRectGetMinX((v).frame) // 获得控件屏幕的x坐标
+#define MinY(v)            CGRectGetMinY((v).frame) // 获得控件屏幕的Y坐标
+
+#define MidX(v)            CGRectGetMidX((v).frame) //横坐标加上到控件中点坐标
+#define MidY(v)            CGRectGetMidY((v).frame) //纵坐标加上到控件中点坐标
+
+#define MaxX(v)            CGRectGetMaxX((v).frame) //横坐标加上控件的宽度
+#define MaxY(v)            CGRectGetMaxY((v).frame) //纵坐标加上控件的高度
+
+#define kWelcomeHeight 80
+#define kWelcomeTop (kScreenHeight-(kWelcomeHeight+kScreenWidth+kGap50))/2
+
+//手势密码样式
+#define kDrawLineWidth 4
+//未选中的按钮的颜色
+#define kDrawBtnUnselectColor [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.8]
+//蓝色
+#define COLORBLUE [UIColor colorWithRed:81/255.0 green:150/255.0 blue:238/255.0 alpha:1]
+//选中的按钮颜色
+#define kDrawBtnSelectColor kCyan
+//正常的线条颜色
+#define kDrawLineRightColor kCyan
+//错误的线条颜色
+#define kDrawLineWrongColor [UIColor orangeColor]
+#define WIDTH(v)           (v).frame.size.width
+#define HEIGHT(v)          (v).frame.size.height
+//字体大小
+#define FONT_25 [UIFont systemFontOfSize:25.0]
+#define FONT_24 [UIFont systemFontOfSize:24.0]
+#define FONT_23 [UIFont systemFontOfSize:23.0]
+#define FONT_22 [UIFont systemFontOfSize:22.0]
+#define FONT_21 [UIFont systemFontOfSize:21.0]
+#define FONT_20 [UIFont systemFontOfSize:20.0]
+#define FONT_19 [UIFont systemFontOfSize:19.0]
+#define FONT_18 [UIFont systemFontOfSize:18.0]
+#define FONT_17 [UIFont systemFontOfSize:17.0]
+#define FONT_16 [UIFont systemFontOfSize:16.0]
+#define FONT_15 [UIFont systemFontOfSize:15.0]
+#define FONT_14 [UIFont systemFontOfSize:14.0]
+#define FONT_13 [UIFont systemFontOfSize:13.0]
+#define FONT_12 [UIFont systemFontOfSize:12.0]
+#define FONT_11 [UIFont systemFontOfSize:11.0]
+#define FONT_10 [UIFont systemFontOfSize:10.0]
+
+
+#define kBgIconGapLR kGap30
+#define kBgIconBgWidth (kScreenWidth - kBgIconGapLR*4)/4
+#define kBgIconBgHight (kBgIconBgWidth+kGap50)
+#define kBottomHeight (kScreenHeight-kBlankHeight)/3*2
+
+
+
+#import "LocalNoticeSetTableViewController.h"
+#import "LocalNoticeSetTableViewCell.h"
+#import "LocalNoticeModel.h"
+#import "LocalNoticeModelDBTool.h"
+
+#import "ClockTableViewController.h"
+#import "ClockTableViewCell.h"
+
+#import "CZPickerView.h"
+
+#import "DataBaseTool.h"
+#import "ColumnPropertyMappingDelegate.h"
+#import "TextFieldValidator.h"
+#import "TextFieldValidatorRule.h"
+#import "FMDB.h"
+#import "JSONKit.h"
+#import "Masonry.h"
+#import "UIButton+ZJMasonryKit.h"
+#import "UIImageView+ZJMasonryKit.h"
+#import "UILabel+ZJMasonryKit.h"
+#import "UIView+ZJMasonryKit.h"
+#import "UIView+ZJMasonryFrame.h"
+//#import "YYKit.h"
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "ChatDemoUIDefine.h"
+#import "EMAlertView.h"
+#import "TTGlobalUICommon.h"
+//#import "YYAnimatedImageView.h"
+#import "EaseUI.h"
+#define DEMO_CALL 1
+
+
+#import <Hyphenate/Hyphenate.h>
+
+
+#endif
+#endif
+ /* PrefixHeader_pch */
